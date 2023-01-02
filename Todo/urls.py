@@ -21,18 +21,28 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from plan.views import *
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 router = DefaultRouter()
 # router.register('todos', TodoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     # path('', include(router.urls)),
 
-    path('get-token', obtain_auth_token, name='get_token'),
+    # path('get-token', obtain_auth_token, name='get_token'),
+
+    path('token-obtain', TokenObtainPairView.as_view()),
+    path('token-refresh', TokenRefreshView.as_view()),
+
+    # path('todos', TodoAPIView.as_view()),
+    # path('todos/<int:pk>', TodoAPIView.as_view()),
 
     path('todos', TodoAPIView.as_view()),
     path('todos/<int:pk>', TodoAPIView.as_view()),
-
-
 
 ]
